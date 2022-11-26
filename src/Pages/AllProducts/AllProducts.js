@@ -1,23 +1,27 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
+import BookingModals from '../../components/BookingModals/BookingModals';
 import Loader from '../../components/Loader/Loader';
 import Product from '../Furnitures/Product/Product';
 
 const AllProducts = () => {
 
+    const { loading } = useContext(AuthContext)
+    const [furniture, setFurniture] = useState(null)
     const { data: products = [], isLoading } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/products`, {
                 headers: {
-                    authorization: `bearer ${localStorage.getItem('token')}`
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
             });
             const data = await res.json();
             return data
         }
     })
-    if (isLoading) {
+    if (isLoading || loading) {
         return <Loader></Loader>
     }
 
@@ -30,7 +34,18 @@ const AllProducts = () => {
                     products.map(product => <Product
                         key={product._id}
                         product={product}
+                        setFurniture={setFurniture}
                     ></Product>)
+                }
+            </div>
+            <div>
+
+                {
+                    furniture &&
+                    <BookingModals
+                        furniture={furniture}
+                        setFurniture={setFurniture}
+                    ></BookingModals>
                 }
             </div>
         </div>

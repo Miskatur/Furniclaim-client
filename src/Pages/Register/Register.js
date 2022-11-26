@@ -28,7 +28,7 @@ const Register = () => {
                     headers: {
                         "Access-Control-Allow-Origin": "*",
                         "Access-Control-Allow-Credentials": true,
-                        authorization: (`bearer ${localStorage.getItem('token')}`)
+                        authorization: (`bearer ${localStorage.getItem('accessToken')}`)
                     }
                 })
                     .then(res => res.json())
@@ -58,7 +58,8 @@ const Register = () => {
                             fetch(`http://localhost:5000/users`, {
                                 method: 'POST',
                                 headers: {
-                                    "content-type": "application/json"
+                                    "content-type": "application/json",
+                                    authorization: (`bearer ${localStorage.getItem('accessToken')}`)
                                 },
                                 body: JSON.stringify(user)
                             })

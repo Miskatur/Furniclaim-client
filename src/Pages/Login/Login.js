@@ -29,8 +29,8 @@ const Login = () => {
                     .then(data => {
                         console.log(data)
                         localStorage.setItem('role', data.role)
+                        navigate(from, { replace: true })
                     })
-                navigate(from, { replace: true })
             })
     }
     return (

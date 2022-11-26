@@ -14,7 +14,7 @@ const AddProduct = () => {
     useEffect(() => {
         fetch(`http://localhost:5000/users/${user?.email}`, {
             headers: {
-                authorization: `bearer ${localStorage.getItem('token')}`
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
             }
         })
             .then(res => res.json())
@@ -58,14 +58,15 @@ const AddProduct = () => {
                         sellerName: name,
                         verified,
                         condition,
-                        email
+                        email,
+                        availabilty: true
                     }
                     console.log(productsInfo)
                     fetch(`http://localhost:5000/products`, {
                         method: 'POST',
                         headers: {
                             "content-type": "application/json",
-                            authorization: `bearer ${localStorage.getItem('token')}`
+                            authorization: `bearer ${localStorage.getItem('accessToken')}`
                         },
                         body: JSON.stringify(productsInfo)
                     })

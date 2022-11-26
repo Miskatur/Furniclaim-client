@@ -11,7 +11,7 @@ const Categories = () => {
     useEffect(() => {
         axios.get(`http://localhost:5000/categories`, {
             headers: {
-                authorization: (`bearer ${localStorage.getItem('token')}`)
+                authorization: (`bearer ${localStorage.getItem('accessToken')}`)
             }
         })
             .then(res => {

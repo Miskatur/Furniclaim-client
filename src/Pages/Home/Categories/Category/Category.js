@@ -13,7 +13,8 @@ const Category = ({ category }) => {
                         </div>
                         <p className='text-2xl font-bold'>{name}</p>
                     </div>
-                </div></Link>
+                </div>
+            </Link>
         </div>
     );
 };

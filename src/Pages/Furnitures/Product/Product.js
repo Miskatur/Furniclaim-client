@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../../AuthProvider/AuthProvider';
 
 
-const Product = ({ product }) => {
+const Product = ({ product, setFurniture, isDisable }) => {
     const { condition, image, location, name, originalPrice, postedTime, resalePrice, sellerName, usedYear, verified, } = product;
+
+    const { user } = useContext(AuthContext)
     return (
-        <div className="card w-96 mx-auto h-[560px] bg-base-100 lg:shadow-xl border-2">
+        <div className="card w-96 mx-auto h-[560px] bg-base-100 lg:shadow-xl border-2 relative ">
             <figure><img src={image} alt="Shoes" className='h-64 w-full rounded-2xl' /></figure>
             <div className='mx-5 text-left'>
                 <h2 className="card-title font-bold text-center text-secondary h-20">
@@ -28,12 +31,28 @@ const Product = ({ product }) => {
                     <p className='font-semibold'>Price : <span className='font-bold'>{resalePrice}</span></p>
                     <p className='font-semibold'>Original Price : <span><del>{originalPrice}</del></span></p>
                 </div>
-                <div className='text-black'>
-                    <p className='font-semibold'>Condition : <span className='font-bold'>{condition}</span></p>
-                    <p className='font-semibold'>Used For : <span className='font-bold'>{usedYear} Years</span></p>
+                <div className='text-black flex justify-between items-center'>
+                    <div>
+                        <p className='font-semibold'>Condition : <span className='font-bold'>{condition}</span></p>
+                        <p className='font-semibold'>Used For : <span className='font-bold'>{usedYear} Years</span></p>
+                    </div>
+                    <div>
+                        <button className='btn btn-xs bg-red-500 hover:bg-red-700 text-white font-bold'>Report</button>
+                    </div>
                 </div>
-                <button className='btn btn-outline btn-secondary w-full mt-5'>Add To Cart</button>
             </div>
+            {
+                user?.uid &&
+                <label
+                    onClick={() => setFurniture(product)}
+                    htmlFor="addCart-modal"
+                    className='btn btn-outline rounded-lg btn-secondary w-full absolute bottom-0'
+                >
+                    Add to Cart
+                </label>
+
+            }
+            {/* btn-disabled */}
         </div>
     );
 };
