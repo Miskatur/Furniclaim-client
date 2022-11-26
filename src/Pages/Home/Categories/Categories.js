@@ -9,7 +9,11 @@ const Categories = () => {
     const { loading, setLoading } = useContext(AuthContext)
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/categories`)
+        axios.get(`http://localhost:5000/categories`, {
+            headers: {
+                authorization: (`bearer ${localStorage.getItem('token')}`)
+            }
+        })
             .then(res => {
                 setCategories(res.data)
                 setLoading(false)

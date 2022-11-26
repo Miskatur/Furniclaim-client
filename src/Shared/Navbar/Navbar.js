@@ -1,40 +1,49 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { FaBars, FaBook, FaGoogle } from "react-icons/fa";
+import { Link, useNavigate } from 'react-router-dom';
+import { FaBars, FaGoogle } from "react-icons/fa";
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
 import toast from 'react-hot-toast';
-
+import { setAuthtoken } from '../../AuthToken/AuthToken';
 
 const Navbar = () => {
+    const navigate = useNavigate()
     const googleProvider = new GoogleAuthProvider()
     const { user, setUser, Logout, googleSignIn } = useContext(AuthContext)
+    const role = localStorage.getItem('role')
     const handleLogout = () => {
         Logout()
-            .then(() => { })
+            .then(() => {
+                localStorage.removeItem('accessToken')
+                localStorage.removeItem('role')
+                navigate('/')
+            })
             .catch(error => console.error(error))
-
     }
-
     const handleGoogleSignIn = () => {
         googleSignIn(googleProvider)
             .then(res => {
                 const user = res.user;
                 setUser(user)
-                console.log(user);
+                setAuthtoken(user)
+                localStorage.setItem('role', 'Buyer')
             })
             .catch(error => {
                 const message = error.message;
                 toast.error(message)
             })
     }
-
     const menuItems = <>
-        <li><Link>Profile</Link></li>
-        <li><Link>Settings</Link></li>
         {
             user?.uid ?
                 <>
+                    {
+                        role === "Buyer" &&
+                        <>
+                            <li><Link className='lg:hidden'>My Orders</Link></li>
+                        </>
+                    }
+                    <li><Link className='lg:hidden' to={'/allproducts'}>All Products</Link></li>
                     <li><Link className='lg:hidden' onClick={handleLogout}>Logout</Link></li>
                 </> :
                 <>
@@ -52,10 +61,12 @@ const Navbar = () => {
             </div>
             <div className="flex items-center">
 
-                <Link className='btn btn-ghost flex items-center'><FaBook className='mr-3' /> <span >Blogs</span></Link>
+                <Link className='btn btn-ghost text-accent font-bold'>Blogs</Link>
                 {
                     user?.uid ?
                         <>
+                            <Link className='text-accent font-bold btn btn-ghost hidden lg:flex' to={'/allproducts'}>All Products</Link>
+                            <Link className=' text-accent font-bold btn btn-ghost hidden lg:flex' to={'/dashboard'}>Dashboard</Link>
                             <Link className=' text-accent font-bold btn btn-ghost hidden lg:flex' onClick={handleLogout}>Logout</Link>
                         </> :
                         <>
@@ -67,12 +78,12 @@ const Navbar = () => {
                     {
                         user?.uid ?
                             <div className="dropdown dropdown-end">
-                                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                <label tabIndex={0} className="btn btn-ghost btn-circle avatar ">
                                     <div className="w-10 rounded-full">
                                         <img src={user?.photoURL} alt="" />
                                     </div>
                                 </label>
-                                <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 text-secondary rounded-box w-52">
+                                <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 text-secondary rounded-box w-52 lg:hidden">
                                     {menuItems}
                                 </ul>
                             </div>
@@ -89,8 +100,12 @@ const Navbar = () => {
                             </div>
                     }
                 </div>
-
             </div>
+            {
+                user?.uid &&
+                <label htmlFor="dashboard-drawer" tabIndex={2} className="btn btn-ghost md:hidden mr-auto drawer-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg></label>
+            }
         </div>
     );
 };

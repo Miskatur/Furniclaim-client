@@ -8,7 +8,6 @@ const Furnitures = () => {
     const category = useLoaderData()
     const navigation = useNavigation()
     const { name } = category;
-    // const date = new Date().toISOString().split('T')[0];
 
     const url = `http://localhost:5000/products/${name}`
 

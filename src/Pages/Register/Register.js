@@ -3,11 +3,12 @@ import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
+import { setAuthtoken } from '../../AuthToken/AuthToken';
 
 const Register = () => {
     const navigate = useNavigate()
     const { createUser, updateUserInfo } = useContext(AuthContext)
-    const { errorMessage, setErrorMessage } = useState('')
+    const [errorMessage, setErrorMessage] = useState('')
     const ImgKey = process.env.REACT_APP_ImgBB_API_KEY;
 
     const handleRegister = event => {
@@ -21,6 +22,19 @@ const Register = () => {
         console.log(name, email, image, password, role)
         createUser(email, password)
             .then(res => {
+                const user = res.user;
+                setAuthtoken(user)
+                fetch(`http://localhost:5000/user/${user?.email}`, {
+                    headers: {
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Credentials": true,
+                        authorization: (`bearer ${localStorage.getItem('token')}`)
+                    }
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('role', data?.role)
+                    })
                 const formData = new FormData()
                 formData.append('image', image)
                 const url = `https://api.imgbb.com/1/upload?key=${ImgKey}`
@@ -52,6 +66,7 @@ const Register = () => {
                                 .then((data) => {
                                     if (data.acknowledged) {
                                         toast.success('User created Successfully!')
+                                        localStorage.setItem('role', role)
                                         navigate('/')
                                     }
                                     console.log(data)
