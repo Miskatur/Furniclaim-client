@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 
-const BookingModals = ({ furniture, setFurniture, refetch }) => {
+const BookingModals = ({ furniture, setFurniture }) => {
     const { user } = useContext(AuthContext)
-    const { image, category, name, email, resalePrice } = furniture;
+    const { image, category, name, email, resalePrice, availabilty } = furniture;
 
     const handleModalsData = event => {
         event.preventDefault()
@@ -25,7 +25,7 @@ const BookingModals = ({ furniture, setFurniture, refetch }) => {
             image,
             productCategory: category,
             sellerEmail: email,
-            isAvailable: true
+            availabilty
         }
         console.log(orderData)
         fetch(`http://localhost:5000/orders`, {
@@ -42,7 +42,7 @@ const BookingModals = ({ furniture, setFurniture, refetch }) => {
                 if (data.acknowledged) {
                     setFurniture(null)
                     toast.success('Appointment booked Successfully.')
-                    refetch()
+
                 }
                 else {
                     toast.error(data.message)
@@ -65,9 +65,9 @@ const BookingModals = ({ furniture, setFurniture, refetch }) => {
 
                         <input type="text" name='price' value={`${resalePrice}`} className={`input input-bordered font-semibold text-secondary  w-full mb-5`} readOnly />
 
-                        <input type="number" name='phone' placeholder="Phone Number" className={`input input-bordered font-semibold  w-full mb-5 `} required />
+                        <input type="number" name='phone' placeholder="Phone Number" className={`input input-bordered font-semibold text-secondary w-full mb-5 `} required />
 
-                        <input type="text" name='location' placeholder="Your Location" className={`input input-bordered font-semibold  w-full mb-5 `} required />
+                        <input type="text" name='location' placeholder="Your Location" className={`input input-bordered font-semibold text-secondary w-full mb-5 `} required />
 
 
                         <input type="submit" value="Add To Cart" className='btn text-white font-semibold w-full' />

@@ -40,10 +40,12 @@ const Navbar = () => {
                     {
                         role === "Buyer" &&
                         <>
-                            <li><Link className='lg:hidden'>My Orders</Link></li>
+                            <li><Link className='lg:hidden' to={'/allproducts'}>All Products</Link></li>
                         </>
                     }
-                    <li><Link className='lg:hidden' to={'/allproducts'}>All Products</Link></li>
+
+                    <li><Link className='lg:hidden' to={'/dashboard'}>Dashboard</Link></li>
+
                     <li><Link className='lg:hidden' onClick={handleLogout}>Logout</Link></li>
                 </> :
                 <>
@@ -65,7 +67,14 @@ const Navbar = () => {
                 {
                     user?.uid ?
                         <>
-                            <Link className='text-accent font-bold btn btn-ghost hidden lg:flex' to={'/allproducts'}>All Products</Link>
+                            {
+                                role === "Buyer" &&
+                                <Link className='text-accent font-bold btn btn-ghost hidden lg:flex' to={'/allproducts'}>All Products</Link>
+                            }
+                            {
+                                role === "Admin" &&
+                                <Link className='text-accent font-bold btn btn-ghost hidden lg:flex' to={'/allproducts'}>All Products</Link>
+                            }
                             <Link className=' text-accent font-bold btn btn-ghost hidden lg:flex' to={'/dashboard'}>Dashboard</Link>
                             <Link className=' text-accent font-bold btn btn-ghost hidden lg:flex' onClick={handleLogout}>Logout</Link>
                         </> :

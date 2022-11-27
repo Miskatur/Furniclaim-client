@@ -5,6 +5,7 @@ import AllProducts from "../../Pages/AllProducts/AllProducts";
 import AddProduct from "../../Pages/Dashboard/AddProduct/AddProduct";
 import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
+import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
 import ReportedItems from "../../Pages/Dashboard/ReportedItems/ReportedItems";
@@ -49,6 +50,10 @@ export const routes = createBrowserRouter([
         children: [
             {
                 path: '/dashboard',
+                element: <Dashboard></Dashboard>
+            },
+            {
+                path: '/dashboard/myorders',
                 element: <PrivateRoutes><MyOrders></MyOrders></PrivateRoutes>
             },
             {

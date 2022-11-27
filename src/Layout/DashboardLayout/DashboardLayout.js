@@ -13,13 +13,13 @@ const DashboardLayout = () => {
                     <Outlet></Outlet>
 
                 </div>
-                <div className="drawer-side lg:px-20">
+                <div className="drawer-side lg:px-10">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 bg-base-100 lg:bg-transparent text-secondary font-bold">
                         {/* <!-- Sidebar content here --> */}
                         {
                             role === 'Buyer' &&
-                            <li className=' hover:text-primary'><Link to={'/dashboard'}>My Orders</Link></li>
+                            <li className=' hover:text-primary'><Link to={'/dashboard/myorders'}>My Orders</Link></li>
                         }
                         {
                             role === "Admin" &&

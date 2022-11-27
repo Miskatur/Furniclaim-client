@@ -84,7 +84,7 @@ const AddProduct = () => {
 
     return (
         <div className='my-3'>
-            <div className='border bg-base-100 p-10 w-2/3 mr-auto rounded-xl shadow-xl'>
+            <div className='border bg-base-100 p-10 lg:w-2/3 mr-auto rounded-xl shadow-xl'>
                 <h2 className='text-2xl text-secondary font-bold mb-5'>Provide Your Furniture Information</h2>
                 <form onSubmit={handleAddProduct} className='text-black'>
                     <input name='name' type="text" placeholder="Product Name" className="input input-bordered input-primary w-full mb-3" required />
