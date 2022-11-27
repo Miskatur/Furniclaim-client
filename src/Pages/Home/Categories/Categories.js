@@ -37,8 +37,6 @@ const Categories = () => {
                     ></Category>)
                 }
 
-
-
             </div>
         </div>
     );

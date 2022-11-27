@@ -10,7 +10,6 @@ const AddProduct = () => {
     const { verified, email, name } = loggedInUser;
     const ImgKey = process.env.REACT_APP_ImgBB_API_KEY;
     const navigate = useNavigate()
-    console.log(loggedInUser);
     useEffect(() => {
         fetch(`http://localhost:5000/users/${user?.email}`, {
             headers: {
@@ -76,7 +75,6 @@ const AddProduct = () => {
                                 toast.success('You have Successfully Added A Product!')
                                 navigate('/dashboard/myproducts')
                             }
-                            console.log(data)
                         })
                 }
             })
@@ -112,12 +110,12 @@ const AddProduct = () => {
                         </select>
                     </div>
                     <input name='originalPrice' type="number" placeholder="Original Price" className="input input-bordered input-primary w-full mb-3" required />
-                    <input name='resalePrice' type="text" placeholder="Your Price" className="input input-bordered input-primary w-full mb-3" required />
+                    <input name='resalePrice' type="number" placeholder="Your Price" className="input input-bordered input-primary w-full mb-3" required />
                     <div className="form-control w-full">
                         <label htmlFor="file" className="label"><span className='label-text text-black'>
                             Provide Your Furniture Picture </span>
                         </label>
-                        <input name='image' type="file" className="file-input file-input-bordered file-input-secondary w-full text-black mb-5" />
+                        <input name='image' type="file" className="file-input file-input-bordered file-input-secondary w-full text-black mb-5" required />
                     </div>
                     <button className='btn btn-secondary w-full'>Add Product</button>
                 </form>
