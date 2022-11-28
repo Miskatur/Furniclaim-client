@@ -7,7 +7,7 @@ const AddProduct = () => {
     const { user } = useContext(AuthContext)
     const date = new Date().toISOString().split('T')[0];
     const [loggedInUser, setLoggedInUser] = useState([])
-    const { verified, email, name } = loggedInUser;
+    const { verified, email, name, _id } = loggedInUser;
     const ImgKey = process.env.REACT_APP_ImgBB_API_KEY;
     const navigate = useNavigate()
     useEffect(() => {
@@ -58,7 +58,8 @@ const AddProduct = () => {
                         verified,
                         condition,
                         email,
-                        availabilty: true
+                        availabilty: true,
+                        sellerId: _id
                     }
                     console.log(productsInfo)
                     fetch(`https://furniclaim-server.vercel.app/products`, {

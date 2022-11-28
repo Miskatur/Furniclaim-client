@@ -17,6 +17,7 @@ const AllSellers = () => {
     })
 
     const handleVerify = (seller) => {
+        console.log(seller)
         fetch(`https://furniclaim-server.vercel.app/users/admin/seller/verify/${seller._id}`, {
             method: 'PUT',
             headers: {
@@ -28,14 +29,14 @@ const AllSellers = () => {
             .then(data => {
                 if (data?.modifiedCount > 0) {
                     toast.success('Seller Verified Successfully!')
-                    fetch(`https://furniclaim-server.vercel.app/userverify/${seller.name}`, {
-                        method: 'PATCH',
+                    fetch(`https://furniclaim-server.vercel.app/userverify/${seller._id}`, {
+                        method: 'PUT',
                         headers: {
                             authorization: `bearer ${localStorage.getItem('accessToken')}`
                         }
                     })
                         .then(res => res.json())
-                        .then(() => { })
+                        .then((data) => { console.log(data); })
                     refetch()
                 }
                 else {
@@ -43,6 +44,9 @@ const AllSellers = () => {
                 }
             })
     }
+
+
+
     console.log(buyers)
     return (
         <div>
