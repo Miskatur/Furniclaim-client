@@ -44,7 +44,25 @@ const AllSellers = () => {
                 }
             })
     }
+    const handleDelete = (id) => {
+        fetch(`http://localhost:5000/users/${id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
 
+            .then(res => res.json())
+            .then(data => {
+                if (data?.modifiedCount > 0) {
+                    toast.success('Sellers Deleted Successfully!')
+                    refetch()
+                }
+                else {
+                    toast.error(data.message)
+                }
+            })
+    }
 
 
     console.log(buyers)
@@ -91,7 +109,7 @@ const AllSellers = () => {
                                             }
                                         </td>
                                         <td>
-                                            <button className='btn btn-xs btn-outline font-bold text-red-500 hover:text-white'>Delete</button>
+                                            <button className='btn btn-xs btn-outline font-bold text-primary hover:text-white' onClick={() => handleDelete(seller._id)}>Delete</button>
                                         </td>
                                     </tr>
 

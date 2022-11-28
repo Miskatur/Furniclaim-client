@@ -75,7 +75,7 @@ const AllBuyers = () => {
                                         <td>{buyer.email}</td>
                                         <td>
                                             {
-                                                buyer.verified === false && <button className='btn btn-xs btn-outline font-bold text-primary hover:text-white' onClick={() => handleDelete(buyer._id)}>Delete</button>
+                                                <button className='btn btn-xs btn-outline font-bold text-primary hover:text-white' onClick={() => handleDelete(buyer._id)}>Delete</button>
 
                                             }
                                         </td>
