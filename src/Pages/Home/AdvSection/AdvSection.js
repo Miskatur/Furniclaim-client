@@ -1,19 +1,42 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../../AuthProvider/AuthProvider';
+import { useQuery } from '@tanstack/react-query';
+import React, { useState } from 'react';
+import toast from 'react-hot-toast';
+import BookingModals from '../../../components/BookingModals/BookingModals';
 import Loader from '../../../components/Loader/Loader';
 import Product from '../../Furnitures/Product/Product';
 
 const AdvSection = () => {
-    const { loading } = useContext(AuthContext)
-    const [products, setProducts] = useState([])
+    const [furniture, setFurniture] = useState(null)
 
-    useEffect(() => {
-        fetch(`https://furniclaim-server.vercel.app/advproduct`)
+    const { data: products = [], isLoading, refetch } = useQuery({
+        queryKey: ['products'],
+        queryFn: async () => {
+            const res = await fetch(`https://furniclaim-server.vercel.app/advproduct`, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
+            const data = await res.json();
+            return data
+        }
+    })
+    const handleReport = id => {
+        fetch(`http://localhost:5000/reportproduct/${id}`, {
+            method: 'PUT',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
             .then(res => res.json())
-            .then(data => setProducts(data))
-    }, [])
+            .then((data) => {
+                if (data.acknowledged) {
+                    toast.success('Reported to Admin Succesfully')
+                    refetch()
+                }
+            })
+    }
 
-    if (loading) {
+    if (isLoading) {
         <Loader></Loader>
     }
 
@@ -24,10 +47,23 @@ const AdvSection = () => {
 
                 <div className='grid lg:grid-cols-3 gap-5 my-10 mx-5 lg:mx-0'>
                     {
-                        products.map((product) => <Product
-                            key={product._id}
-                            product={product}
-                        ></Product>)
+                        products.map((product) =>
+                            <Product
+                                key={product._id}
+                                product={product}
+                                setFurniture={setFurniture}
+                                handleReport={handleReport}
+                            ></Product>)
+                    }
+                </div>
+                <div>
+
+                    {
+                        furniture &&
+                        <BookingModals
+                            furniture={furniture}
+                            setFurniture={setFurniture}
+                        ></BookingModals>
                     }
                 </div>
             </div>
