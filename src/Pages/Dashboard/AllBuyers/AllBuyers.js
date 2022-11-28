@@ -7,7 +7,7 @@ const AllBuyers = () => {
     const { data: buyers = [], refetch, isLoading } = useQuery({
         queryKey: ["buyer"],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/users/admin/buyer`, {
+            const res = await fetch(`https://furniclaim-server.vercel.app/users/admin/buyer`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -18,7 +18,7 @@ const AllBuyers = () => {
     })
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:5000/users/${id}`, {
+        fetch(`https://furniclaim-server.vercel.app/users/${id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

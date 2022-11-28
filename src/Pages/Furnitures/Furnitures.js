@@ -25,7 +25,7 @@ const Furnitures = () => {
     })
 
     const handleReport = id => {
-        fetch(`http://localhost:5000/reportproduct/${id}`, {
+        fetch(`https://furniclaim-server.vercel.app/reportproduct/${id}`, {
             method: 'PUT',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
