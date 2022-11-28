@@ -1,8 +1,13 @@
 import React from 'react';
 
-const Product = ({ product, setFurniture }) => {
-    const { condition, image, location, name, originalPrice, postedTime, resalePrice, sellerName, usedYear, verified, availabilty } = product;
+
+const Product = ({ product, setFurniture, handleReport }) => {
+    const { condition, image, location, name, originalPrice, postedTime, resalePrice, sellerName, usedYear, verified, availabilty, _id, report } = product;
     const role = localStorage.getItem('role')
+
+
+
+
     return (
         <div>
 
@@ -37,7 +42,13 @@ const Product = ({ product, setFurniture }) => {
                                 <p className='font-semibold'>Used For : <span className='font-bold'>{usedYear} Years</span></p>
                             </div>
                             <div>
-                                <button className='btn btn-xs bg-red-500 hover:bg-red-700 text-white font-bold'>Report</button>
+                                {
+                                    report === true ?
+                                        <p className='text-gray-500 text-xs'>Reported</p> :
+
+                                        <button className='btn btn-xs bg-red-500 hover:bg-red-700 text-white font-bold'
+                                            onClick={() => handleReport(_id)}>Report</button>
+                                }
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 import { useLoaderData, useNavigation } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import BookingModals from '../../components/BookingModals/BookingModals';
@@ -23,6 +24,21 @@ const Furnitures = () => {
         }
     })
 
+    const handleReport = id => {
+        fetch(`http://localhost:5000/reportproduct/${id}`, {
+            method: 'PUT',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then((data) => {
+                if (data.acknowledged) {
+                    toast.success('Reported to Admin Succesfully')
+                    refetch()
+                }
+            })
+    }
 
     if (navigation.state === 'loading' || isLoading || loading) {
         return <Loader></Loader>
@@ -39,6 +55,7 @@ const Furnitures = () => {
                         key={product._id}
                         product={product}
                         setFurniture={setFurniture}
+                        handleReport={handleReport}
                     ></Product>)
                 }
             </div>

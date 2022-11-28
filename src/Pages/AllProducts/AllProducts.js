@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import BookingModals from '../../components/BookingModals/BookingModals';
 import Loader from '../../components/Loader/Loader';
@@ -9,7 +10,7 @@ const AllProducts = () => {
 
     const { loading } = useContext(AuthContext)
     const [furniture, setFurniture] = useState(null)
-    const { data: products = [], isLoading } = useQuery({
+    const { data: products = [], isLoading, refetch } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
             const res = await fetch(`https://furniclaim-server.vercel.app/products`, {
@@ -21,6 +22,23 @@ const AllProducts = () => {
             return data
         }
     })
+
+    const handleReport = id => {
+        fetch(`http://localhost:5000/reportproduct/${id}`, {
+            method: 'PUT',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then((data) => {
+                if (data.acknowledged) {
+                    toast.success('Reported to Admin Succesfully')
+                    refetch()
+                }
+            })
+    }
+
     if (isLoading || loading) {
         return <Loader></Loader>
     }
@@ -35,6 +53,7 @@ const AllProducts = () => {
                         key={product._id}
                         product={product}
                         setFurniture={setFurniture}
+                        handleReport={handleReport}
                     ></Product>)
                 }
             </div>

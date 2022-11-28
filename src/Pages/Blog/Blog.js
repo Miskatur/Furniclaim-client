@@ -8,7 +8,7 @@ const Blog = () => {
             <div className='border-2 rounded-lg p-5'>
                 <h2 className='text-2xl bg-slate-500 text-secondary font-bold py-2 my-5'>
                     What are the different ways to manage a state in a React application?</h2>
-                <p className='texl-lg font-semibold text-secondary'>
+                <div className='texl-lg font-semibold text-secondary'>
                     The Four Kinds of React State to Manage
                     <ul>
                         <li>Local state.</li>
@@ -16,10 +16,7 @@ const Blog = () => {
                         <li>Server state.</li>
                         <li>URL state.</li>
                     </ul>
-
-
-
-                </p>
+                </div>
             </div>
             <div className='border-2 rounded-lg p-5 my-5'>
                 <h2 className='text-2xl bg-slate-500 text-secondary font-bold py-2 my-5'>
