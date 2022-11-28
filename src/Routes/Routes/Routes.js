@@ -10,6 +10,7 @@ import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
 import ReportedItems from "../../Pages/Dashboard/ReportedItems/ReportedItems";
+import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
 import Furnitures from "../../Pages/Furnitures/Furnitures";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login"
@@ -87,5 +88,9 @@ export const routes = createBrowserRouter([
             },
 
         ]
+    },
+    {
+        path: '/*',
+        element: <ErrorPage></ErrorPage>
     }
 ])

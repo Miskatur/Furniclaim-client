@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../../AuthProvider/AuthProvider';
+import Loader from '../../../components/Loader/Loader';
 import Product from '../../Furnitures/Product/Product';
 
 const AdvSection = () => {
-
+    const { loading } = useContext(AuthContext)
     const [products, setProducts] = useState([])
 
     useEffect(() => {
@@ -10,16 +12,11 @@ const AdvSection = () => {
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
-    console.log(products);
-    // var settings = {
-    //     dots: true,
-    //     infinite: true,
-    //     slidesToShow: 3,
-    //     slidesToScroll: 1,
-    //     autoplay: true,
-    //     autoplaySpeed: 2000,
-    //     pauseOnHover: true
-    // };
+
+    if (loading) {
+        <Loader></Loader>
+    }
+
     return (
         <div>
             <h2 className='text-3xl font-bold text-secondary text-center'>Advertisement</h2>
