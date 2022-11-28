@@ -1,4 +1,5 @@
 import React from 'react';
+import AdvSection from '../AdvSection/AdvSection';
 import Banner from '../Banner/Banner';
 import Categories from '../Categories/Categories';
 import ExtraSection from '../ExtraSection/ExtraSection';
@@ -9,6 +10,7 @@ const Home = () => {
         <div>
             <Banner></Banner>
             <Categories></Categories>
+            <AdvSection></AdvSection>
             <ExtraSection></ExtraSection>
             <WhyUs></WhyUs>
         </div>

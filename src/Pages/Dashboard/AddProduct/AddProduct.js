@@ -11,7 +11,7 @@ const AddProduct = () => {
     const ImgKey = process.env.REACT_APP_ImgBB_API_KEY;
     const navigate = useNavigate()
     useEffect(() => {
-        fetch(`http://localhost:5000/users/${user?.email}`, {
+        fetch(`https://furniclaim-server.vercel.app/users/${user?.email}`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
             }
@@ -61,7 +61,7 @@ const AddProduct = () => {
                         availabilty: true
                     }
                     console.log(productsInfo)
-                    fetch(`http://localhost:5000/products`, {
+                    fetch(`https://furniclaim-server.vercel.app/products`, {
                         method: 'POST',
                         headers: {
                             "content-type": "application/json",

@@ -12,7 +12,7 @@ const Furnitures = () => {
     const { name } = category;
     const [furniture, setFurniture] = useState(null)
     const { loading } = useContext(AuthContext)
-    const url = `http://localhost:5000/products/${name}`
+    const url = `https://furniclaim-server.vercel.app/products/${name}`
 
     const { data: products = [], isLoading, refetch } = useQuery({
         queryKey: ["name"],

@@ -63,7 +63,7 @@ const Navbar = () => {
             </div>
             <div className="flex items-center">
 
-                <Link className='btn btn-ghost text-accent font-bold'>Blogs</Link>
+                <Link className='btn btn-ghost text-accent font-bold' to={'/blog'}>Blogs</Link>
                 {
                     user?.uid ?
                         <>

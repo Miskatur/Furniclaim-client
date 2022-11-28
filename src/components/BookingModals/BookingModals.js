@@ -28,7 +28,7 @@ const BookingModals = ({ furniture, setFurniture }) => {
             availabilty
         }
         console.log(orderData)
-        fetch(`http://localhost:5000/orders`, {
+        fetch(`https://furniclaim-server.vercel.app/orders`, {
             method: 'POST',
             headers: {
                 "content-type": "application/json",
@@ -38,7 +38,6 @@ const BookingModals = ({ furniture, setFurniture }) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 if (data.acknowledged) {
                     setFurniture(null)
                     toast.success('Appointment booked Successfully.')

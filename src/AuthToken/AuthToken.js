@@ -2,7 +2,7 @@ export const setAuthtoken = user => {
     const currentUser = {
         email: user.email,
     }
-    fetch(`http://localhost:5000/jwt`, {
+    fetch(`https://furniclaim-server.vercel.app/jwt`, {
         method: 'POST',
         headers: {
             "content-type": "application/json"

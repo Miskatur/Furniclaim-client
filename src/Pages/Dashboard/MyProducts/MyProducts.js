@@ -10,11 +10,10 @@ const MyProducts = () => {
     // const [product, setProduct] = useState(null)
     const { user, loading } = useContext(AuthContext)
     const [deletingProduct, setDeletingProduct] = useState(null)
-
     const { data: products = [], refetch, isLoading } = useQuery({
         queryKey: [user.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/product/${user.email}`, {
+            const res = await fetch(`https://furniclaim-server.vercel.app/product/${user.email}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -29,7 +28,7 @@ const MyProducts = () => {
 
     const handleDeletingProduct = (product) => {
         console.log([product]);
-        fetch(`http://localhost:5000/product/${product?._id}`, {
+        fetch(`https://furniclaim-server.vercel.app/product/${product?._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -42,7 +41,31 @@ const MyProducts = () => {
                     refetch()
                 }
             })
+
     }
+
+    const handleAdvertisement = id => {
+        fetch(`https://furniclaim-server.vercel.app/products/${id}`, {
+            method: 'PUT',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data?.modifiedCount > 0) {
+                    toast.success('Products advertised Successfully!')
+                    refetch()
+                }
+                else {
+                    toast.error(data.message)
+                }
+            })
+    }
+
+
+
+
 
     if (loading || isLoading) {
         return <Loader></Loader>
@@ -86,12 +109,10 @@ const MyProducts = () => {
                                     </td>
                                     <td>
                                         {
-                                            product.availabilty ?
-                                                <label
-                                                    htmlFor="confirmation-modal" className="btn btn-xs btn-info ">
-                                                    Advertise Now
-                                                </label> :
-                                                <p>Advertised</p>
+                                            product.availabilty &&
+                                            <button className={`btn btn-sm  btn-info `}
+                                                onClick={() => handleAdvertisement(product._id)}
+                                            >Advertise now</button>
                                         }
                                     </td>
                                     <td>

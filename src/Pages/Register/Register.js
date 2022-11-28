@@ -24,7 +24,7 @@ const Register = () => {
             .then(res => {
                 const user = res.user;
                 setAuthtoken(user)
-                fetch(`http://localhost:5000/user/${user?.email}`, {
+                fetch(`https://furniclaim-server.vercel.app/user/${user?.email}`, {
                     headers: {
                         "Access-Control-Allow-Origin": "*",
                         "Access-Control-Allow-Credentials": true,
@@ -55,7 +55,7 @@ const Register = () => {
                                 role: role,
                                 verified: false
                             }
-                            fetch(`http://localhost:5000/users`, {
+                            fetch(`https://furniclaim-server.vercel.app/users`, {
                                 method: 'POST',
                                 headers: {
                                     "content-type": "application/json",
@@ -70,7 +70,6 @@ const Register = () => {
                                         localStorage.setItem('role', role)
                                         navigate('/')
                                     }
-                                    console.log(data)
                                 })
                         }
 

@@ -18,7 +18,7 @@ const Login = () => {
             .then(res => {
                 const user = res.user;
                 setAuthtoken(user)
-                fetch(`http://localhost:5000/users/${user?.email}`, {
+                fetch(`https://furniclaim-server.vercel.app/users/${user?.email}`, {
                     headers: {
                         "Access-Control-Allow-Origin": "*",
                         "Access-Control-Allow-Credentials": true,

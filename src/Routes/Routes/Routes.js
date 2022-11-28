@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../../Layout/DashboardLayout/DashboardLayout";
 import Main from "../../Layout/Main/Main";
 import AllProducts from "../../Pages/AllProducts/AllProducts";
+import Blog from "../../Pages/Blog/Blog";
 import AddProduct from "../../Pages/Dashboard/AddProduct/AddProduct";
 import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
@@ -26,7 +27,7 @@ export const routes = createBrowserRouter([
             {
                 path: '/category/:id',
                 element: <PrivateRoutes><Furnitures></Furnitures></PrivateRoutes>,
-                loader: ({ params }) => fetch(`http://localhost:5000/categories/${params.id}`)
+                loader: ({ params }) => fetch(`https://furniclaim-server.vercel.app/categories/${params.id}`)
             },
             {
                 path: '/login',
@@ -39,6 +40,10 @@ export const routes = createBrowserRouter([
             {
                 path: '/allproducts',
                 element: <PrivateRoutes><AllProducts></AllProducts></PrivateRoutes>
+            },
+            {
+                path: '/blog',
+                element: <Blog></Blog>
             }
 
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Product = ({ product, setFurniture, isDisable }) => {
+const Product = ({ product, setFurniture }) => {
     const { condition, image, location, name, originalPrice, postedTime, resalePrice, sellerName, usedYear, verified, availabilty } = product;
     const role = localStorage.getItem('role')
     return (

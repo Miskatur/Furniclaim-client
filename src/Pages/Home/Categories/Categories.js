@@ -9,7 +9,7 @@ const Categories = () => {
     const { loading, setLoading } = useContext(AuthContext)
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/categories`, {
+        axios.get(`https://furniclaim-server.vercel.app/categories`, {
             headers: {
                 authorization: (`bearer ${localStorage.getItem('accessToken')}`)
             }

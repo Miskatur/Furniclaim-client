@@ -6,7 +6,7 @@ import Order from './Order';
 
 const MyOrders = () => {
     const { user } = useContext(AuthContext)
-    const url = `http://localhost:5000/orders?email=${user?.email}`
+    const url = `https://furniclaim-server.vercel.app/orders?email=${user?.email}`
     const { data: orders = [], isLoading } = useQuery({
         queryKey: [`${user?.email}`],
         queryFn: async () => {
