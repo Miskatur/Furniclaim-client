@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Order = ({ order, i }) => {
+const Order = ({ order, i, handleDelete }) => {
     const { productName, productCategory, image, phone, availabilty, location } = order;
 
     return (
@@ -23,7 +23,7 @@ const Order = ({ order, i }) => {
                 <td>{location}</td>
                 <td><button className='btn btn-secondary btn-sm'>{`${availabilty ? "Pay Now" : "Paid"}`}</button>
                 </td>
-                <td><button className='btn bg-red-500 hover:bg-red-700 text-white btn-xs'>Delete</button>
+                <td><button className='btn bg-red-500 hover:bg-red-700 text-white btn-xs' onClick={() => { handleDelete(order._id) }}>Delete</button>
                 </td>
 
             </tr>

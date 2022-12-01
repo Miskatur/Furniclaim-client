@@ -54,7 +54,7 @@ const AllSellers = () => {
 
             .then(res => res.json())
             .then(data => {
-                if (data?.modifiedCount > 0) {
+                if (data?.acknowledged) {
                     toast.success('Sellers Deleted Successfully!')
                     refetch()
                 }

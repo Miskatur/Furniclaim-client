@@ -15,11 +15,13 @@ import Furnitures from "../../Pages/Furnitures/Furnitures";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login"
 import Register from "../../Pages/Register/Register";
+import DisplayError from "../../Shared/DisplayError/DisplayError";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 export const routes = createBrowserRouter([
     {
         path: '/',
         element: <Main></Main>,
+        errorElement: <DisplayError></DisplayError>,
         children: [
             {
                 path: '/',
@@ -53,6 +55,7 @@ export const routes = createBrowserRouter([
     {
         path: '/dashboard',
         element: <PrivateRoutes><DashboardLayout></DashboardLayout></PrivateRoutes>,
+        errorElement: <DisplayError></DisplayError>,
         children: [
             {
                 path: '/dashboard',

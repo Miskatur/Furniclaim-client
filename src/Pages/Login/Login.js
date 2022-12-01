@@ -1,10 +1,11 @@
 import { Player } from '@lottiefiles/react-lottie-player';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import { setAuthtoken } from '../../AuthToken/AuthToken';
 
 const Login = () => {
+    const [errorMessage, setErrorMessage] = useState('')
     const { Login } = useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
@@ -14,6 +15,7 @@ const Login = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
+        setErrorMessage('')
         Login(email, password)
             .then(res => {
                 const user = res.user;
@@ -31,6 +33,9 @@ const Login = () => {
                         localStorage.setItem('role', data.role)
                         navigate(from, { replace: true })
                     })
+            })
+            .catch(error => {
+                setErrorMessage(error.message)
             })
     }
     return (
@@ -50,6 +55,7 @@ const Login = () => {
                     <form onSubmit={handleLogin}>
                         <input name='email' type="email" placeholder="Email Address" className="input input-bordered input-primary w-full mb-3 text-black" required />
                         <input name='password' type="password" placeholder="Password" className="input input-bordered input-primary w-full mb-3 text-black" required />
+                        <p className='text-red-500 text-xs'>{errorMessage}</p>
 
                         <button className='btn btn-secondary w-full'>Login</button>
                         <p className='text-black mt-2'>Don't Have an Account? <Link to={'/register'} className="font-bold">Register Now</Link></p>

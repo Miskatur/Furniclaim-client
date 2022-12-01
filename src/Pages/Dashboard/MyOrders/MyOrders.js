@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
 import Loader from '../../../components/Loader/Loader';
 import Order from './Order';
@@ -7,7 +8,7 @@ import Order from './Order';
 const MyOrders = () => {
     const { user } = useContext(AuthContext)
     const url = `https://furniclaim-server.vercel.app/orders?email=${user?.email}`
-    const { data: orders = [], isLoading } = useQuery({
+    const { data: orders = [], isLoading, refetch } = useQuery({
         queryKey: [`${user?.email}`],
         queryFn: async () => {
             const res = await fetch(url, {
@@ -19,7 +20,28 @@ const MyOrders = () => {
             return data
         },
     })
-    console.log(orders.length);
+    const handleDelete = id => {
+        fetch(`https://furniclaim-server.vercel.app/order/${id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data?.acknowledged) {
+                    toast.success('Buyers Deleted Successfully!')
+                    refetch()
+                }
+                else {
+                    toast.error(data.message)
+                }
+            })
+    }
+
+
     if (isLoading) {
         return <Loader></Loader>
     }
@@ -49,6 +71,7 @@ const MyOrders = () => {
                                 key={order._id}
                                 order={order}
                                 i={i}
+                                handleDelete={handleDelete}
                             ></Order>)
                         }
                     </tbody>
