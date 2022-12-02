@@ -24,6 +24,25 @@ const Navbar = () => {
         googleSignIn(googleProvider)
             .then(res => {
                 const user = res.user;
+                console.log(user);
+                // const googleUser = {
+                //     name: user.displayName,
+                //     email: user.email,
+                //     image: user.photoURL,
+                //     role: 'Buyer',
+                //     verified: false
+                // }
+
+                // console.log(googleUser);
+
+                // fetch(`https://furniclaim-server.vercel.app/users`, {
+                //     method: 'POST',
+                //     headers: {
+                //         "content-type": "application/json",
+                //         authorization: (`bearer ${localStorage.getItem('accessToken')}`)
+                //     },
+                //     body: JSON.stringify(googleUser)
+                // })
                 setUser(user)
                 setAuthtoken(user)
                 localStorage.setItem('role', 'Buyer')
@@ -67,14 +86,7 @@ const Navbar = () => {
                 {
                     user?.uid ?
                         <>
-                            {
-                                role === "Buyer" &&
-                                <Link className='text-accent font-bold btn btn-ghost hidden lg:flex' to={'/allproducts'}>All Products</Link>
-                            }
-                            {
-                                role === "Admin" &&
-                                <Link className='text-accent font-bold btn btn-ghost hidden lg:flex' to={'/allproducts'}>All Products</Link>
-                            }
+                            <Link className='text-accent font-bold btn btn-ghost hidden lg:flex' to={'/allproducts'}>All Products</Link>
                             <Link className=' text-accent font-bold btn btn-ghost hidden lg:flex' to={'/dashboard'}>Dashboard</Link>
                             <Link className=' text-accent font-bold btn btn-ghost hidden lg:flex' onClick={handleLogout}>Logout</Link>
                         </> :

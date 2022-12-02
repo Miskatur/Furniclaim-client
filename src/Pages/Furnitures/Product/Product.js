@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../AuthProvider/AuthProvider';
 
 
 const Product = ({ product, setFurniture, handleReport }) => {
     const { condition, image, location, name, originalPrice, postedTime, resalePrice, sellerName, usedYear, verified, availabilty, _id, report } = product;
-    const role = localStorage.getItem('role')
 
+    const { user } = useContext(AuthContext)
 
 
 
@@ -53,33 +55,17 @@ const Product = ({ product, setFurniture, handleReport }) => {
                         </div>
                     </div>
                     {
-                        role === 'Buyer' &&
-                        <label
-                            onClick={() => setFurniture(product)}
-                            htmlFor="addCart-modal"
-                            className='btn btn-outline rounded-lg btn-secondary w-full absolute bottom-0'
-                        >
-                            Add to Cart
-                        </label>
+                        user?.uid ?
+                            <label
+                                onClick={() => setFurniture(product)}
+                                htmlFor="addCart-modal"
+                                className='btn btn-outline rounded-lg btn-secondary w-full absolute bottom-0'
+                            >
+                                Add to Cart
+                            </label>
+                            :
+                            <p className='text-secondary text-2xl flex justify-center items-center mt-5'> Please <Link to={'/login'} className="mx-2 text-blue-700">Login</Link> to buy.</p>
                     }
-                    {
-                        role === 'Admin' &&
-                        <label
-                            onClick={() => setFurniture(product)}
-                            htmlFor="addCart-modal"
-                            className='btn btn-outline rounded-lg btn-secondary w-full absolute bottom-0'
-                        >
-                            Add to Cart
-                        </label>
-                    }
-
-                    {
-                        role === 'Seller' &&
-                        <p className='text-secondary text-2xl flex justify-center items-center mt-5'>You can't buy Products</p>
-                    }
-
-
-
 
                 </div>
             }

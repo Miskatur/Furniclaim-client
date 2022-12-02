@@ -26,6 +26,7 @@ const DashboardLayout = () => {
                             <>
                                 <li className=' hover:text-primary'><Link to={'/dashboard/allsellers'}>All Sellers</Link></li>
                                 <li className=' hover:text-primary'><Link to={'/dashboard/allbuyers'}>All Buyers</Link></li>
+                                <li className=' hover:text-primary'><Link to={'/dashboard/allorders'}>All Orders</Link></li>
                                 <li className=' hover:text-primary'><Link to={'/dashboard/reporteditems'}>Reported Items</Link></li>
                             </>
                         }
