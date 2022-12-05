@@ -32,7 +32,7 @@ const MyOrders = () => {
             .then(data => {
                 console.log(data);
                 if (data?.acknowledged) {
-                    toast.success('Buyers Deleted Successfully!')
+                    toast.success('Orders Deleted Successfully!')
                     refetch()
                 }
                 else {

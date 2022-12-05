@@ -19,7 +19,6 @@ const Login = () => {
         Login(email, password)
             .then(res => {
                 const user = res.user;
-                console.log(user);
                 setAuthtoken(user)
                 fetch(`https://furniclaim-server.vercel.app/users/${user?.email}`, {
                     headers: {
@@ -30,9 +29,8 @@ const Login = () => {
                 })
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data)
                         localStorage.setItem('role', data.role)
-                        navigate(from, { replace: true } || '/')
+                        navigate(from, { replace: true })
                     })
             })
             .catch(error => {

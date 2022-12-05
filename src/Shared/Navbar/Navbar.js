@@ -10,7 +10,7 @@ const Navbar = () => {
     const navigate = useNavigate()
     const googleProvider = new GoogleAuthProvider()
     const { user, setUser, Logout, googleSignIn } = useContext(AuthContext)
-    const role = localStorage.getItem('role')
+    // const role = localStorage.getItem('role')
     const handleLogout = () => {
         Logout()
             .then(() => {
@@ -25,24 +25,24 @@ const Navbar = () => {
             .then(res => {
                 const user = res.user;
                 console.log(user);
-                // const googleUser = {
-                //     name: user.displayName,
-                //     email: user.email,
-                //     image: user.photoURL,
-                //     role: 'Buyer',
-                //     verified: false
-                // }
+                const googleUser = {
+                    name: user.displayName,
+                    email: user.email,
+                    image: user.photoURL,
+                    role: 'Buyer',
+                    verified: false
+                }
 
-                // console.log(googleUser);
+                console.log(googleUser);
 
-                // fetch(`https://furniclaim-server.vercel.app/users`, {
-                //     method: 'POST',
-                //     headers: {
-                //         "content-type": "application/json",
-                //         authorization: (`bearer ${localStorage.getItem('accessToken')}`)
-                //     },
-                //     body: JSON.stringify(googleUser)
-                // })
+                fetch(`http://localhost:5000/users`, {
+                    method: 'POST',
+                    headers: {
+                        "content-type": "application/json",
+                        authorization: (`bearer ${localStorage.getItem('accessToken')}`)
+                    },
+                    body: JSON.stringify(googleUser)
+                })
                 setUser(user)
                 setAuthtoken(user)
                 localStorage.setItem('role', 'Buyer')
@@ -56,12 +56,7 @@ const Navbar = () => {
         {
             user?.uid ?
                 <>
-                    {
-                        role === "Buyer" &&
-                        <>
-                            <li><Link className='lg:hidden' to={'/allproducts'}>All Products</Link></li>
-                        </>
-                    }
+                    <li><Link className='lg:hidden' to={'/allproducts'}>All Products</Link></li>
 
                     <li><Link className='lg:hidden' to={'/dashboard'}>Dashboard</Link></li>
 
