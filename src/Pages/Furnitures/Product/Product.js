@@ -35,8 +35,8 @@ const Product = ({ product, setFurniture, handleReport }) => {
                             <p className='text-black'><small>Posted Date : {postedTime}</small></p>
                         </div>
                         <div className='text-black flex justify-between items-center my-3'>
-                            <p className='font-semibold'>Price : <span className='font-bold'>{resalePrice}</span></p>
-                            <p className='font-semibold'>Original Price : <span><del>{originalPrice}</del></span></p>
+                            <p className='font-semibold'>Price : <span className='font-bold'>${resalePrice}</span></p>
+                            <p className='font-semibold'>Original Price : <span><del>${originalPrice}</del></span></p>
                         </div>
                         <div className='text-black flex justify-between items-center'>
                             <div>

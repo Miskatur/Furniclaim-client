@@ -58,6 +58,7 @@ const MyOrders = () => {
                             <th>Product Image</th>
                             <th>Product Name</th>
                             <th>Category</th>
+                            <th>Price</th>
                             <th>Your Phone</th>
                             <th>Location</th>
                             <th>Payment</th>

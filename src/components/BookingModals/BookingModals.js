@@ -4,7 +4,7 @@ import { AuthContext } from '../../AuthProvider/AuthProvider';
 
 const BookingModals = ({ furniture, setFurniture }) => {
     const { user } = useContext(AuthContext)
-    const { image, category, name, email, resalePrice, availabilty } = furniture;
+    const { image, category, name, email, resalePrice, availabilty, _id } = furniture;
 
     const handleModalsData = event => {
         event.preventDefault()
@@ -25,7 +25,8 @@ const BookingModals = ({ furniture, setFurniture }) => {
             image,
             productCategory: category,
             sellerEmail: email,
-            availabilty
+            availabilty,
+            productId: _id
         }
         console.log(orderData)
         fetch(`https://furniclaim-server.vercel.app/orders`, {

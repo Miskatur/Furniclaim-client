@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Order = ({ order, i, handleDelete }) => {
-    const { productName, productCategory, image, phone, availabilty, location } = order;
+    const { productName, productCategory, image, phone, availabilty, location, _id, price } = order;
 
     return (
         <>
@@ -19,9 +20,19 @@ const Order = ({ order, i, handleDelete }) => {
                 </td>
                 <td>{productName}</td>
                 <td>{productCategory}</td>
+                <td>${price}</td>
                 <td>{phone}</td>
                 <td>{location}</td>
-                <td><button className='btn btn-secondary btn-sm'>{`${availabilty ? "Pay Now" : "Paid"}`}</button>
+                <td>
+                    {
+                        availabilty ?
+                            <Link to={`/dashboard/myorder/payment/${_id}`}>
+                                <button className='btn btn-secondary btn-sm'>{`${"Pay Now"}`}</button>
+                            </Link> :
+
+                            <p className='text-sm font-semibold bg-warning  w-[96px] text-white text-center rounded-lg'>Paid</p>
+
+                    }
                 </td>
                 <td><button className='btn bg-red-500 hover:bg-red-700 text-white btn-xs' onClick={() => { handleDelete(order._id) }}>Delete</button>
                 </td>

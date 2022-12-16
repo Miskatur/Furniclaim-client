@@ -34,6 +34,7 @@ const DashboardLayout = () => {
                             role === "Seller" &&
                             <>
                                 <li className=' hover:text-primary'><Link to={'/dashboard/myproducts'}>My Products</Link></li>
+                                <li className=' hover:text-primary'><Link to={'/dashboard/myclients'}>My Clients</Link></li>
                                 <li className=' hover:text-primary'><Link to={'/dashboard/addproduct'}>Add a Product</Link></li>
                             </>
                         }

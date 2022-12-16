@@ -8,7 +8,9 @@ import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
 import AllOrders from "../../Pages/Dashboard/AllOrders/AllOrders";
 import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
 import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
+import MyClient from "../../Pages/Dashboard/MyClient/MyClient";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
+import Payment from "../../Pages/Dashboard/MyOrders/Payment/Payment";
 import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
 import ReportedItems from "../../Pages/Dashboard/ReportedItems/ReportedItems";
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
@@ -79,6 +81,10 @@ export const routes = createBrowserRouter([
                 element: <MyProducts></MyProducts>
             },
             {
+                path: '/dashboard/myclients',
+                element: <MyClient></MyClient>
+            },
+            {
                 path: '/dashboard/allsellers',
                 element: <AllSellers></AllSellers>
             },
@@ -93,6 +99,11 @@ export const routes = createBrowserRouter([
             {
                 path: '/dashboard/allorders',
                 element: <AllOrders></AllOrders>
+            },
+            {
+                path: '/dashboard/myorder/payment/:id',
+                element: <Payment></Payment>,
+                loader: ({ params }) => fetch(`https://furniclaim-server.vercel.app/order/${params.id}`)
             }
         ]
     },

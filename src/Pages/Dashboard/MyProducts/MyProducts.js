@@ -63,10 +63,6 @@ const MyProducts = () => {
             })
     }
 
-
-
-
-
     if (loading || isLoading) {
         return <Loader></Loader>
     }
