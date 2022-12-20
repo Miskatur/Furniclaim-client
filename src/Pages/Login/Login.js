@@ -1,12 +1,13 @@
 import { Player } from '@lottiefiles/react-lottie-player';
 import React, { useContext, useState } from 'react';
+// import { toast } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import { setAuthtoken } from '../../AuthToken/AuthToken';
 
 const Login = () => {
     const [errorMessage, setErrorMessage] = useState('')
-    const { Login } = useContext(AuthContext)
+    const { Login, resetPassword } = useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
     const from = location.state?.from?.pathname || '/'
@@ -34,8 +35,19 @@ const Login = () => {
                     })
             })
             .catch(error => {
-                setErrorMessage(error.message)
+                if (error.message === 'Firebase: Error (auth/wrong-password).') {
+                    setErrorMessage('Password Error! Try Again With A Different Password.')
+                }
+                if (error.message === 'Firebase: Error (auth/user-not-found).') {
+                    setErrorMessage("This Email Address Doesn't Exist! Try an Valid Email. ")
+                }
             })
+        handleResetPass(email)
+
+    }
+
+    const handleResetPass = (email) => {
+        resetPassword(email)
     }
     return (
         <div>
@@ -53,8 +65,9 @@ const Login = () => {
                     <h2 className='text-2xl text-secondary font-bold mb-5'>Login In</h2>
                     <form onSubmit={handleLogin}>
                         <input name='email' type="email" placeholder="Email Address" className="input input-bordered input-primary w-full mb-3 text-black" required />
-                        <input name='password' type="password" placeholder="Password" className="input input-bordered input-primary w-full mb-3 text-black" required />
-                        <p className='text-red-500 text-xs'>{errorMessage}</p>
+                        <input name='password' type="password" placeholder="Password" className="input input-bordered input-primary w-full text-black" required />
+                        <p className='underline text-blue-700 text-right mb-3 cursor-pointer' onClick={handleResetPass}>Forgot Password?</p>
+                        <p className='text-red-500 text-sm mb-3 text-left'>{errorMessage}</p>
 
                         <button className='btn btn-secondary w-full'>Login</button>
                         <p className='text-black mt-2'>Don't Have an Account? <Link to={'/register'} className="font-bold">Register Now</Link></p>

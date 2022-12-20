@@ -1,7 +1,5 @@
 import React from 'react';
 import CustomButton from '../../../components/CustomButton/CustomButton';
-// import bannergif from '../../../Assets/BannerGif/90901-furniture-animation.gif'
-import { Player } from '@lottiefiles/react-lottie-player';
 
 const Banner = () => {
     return (
@@ -13,15 +11,8 @@ const Banner = () => {
                     <CustomButton>Find Out More</CustomButton>
                 </div>
                 <div>
+                    <img src="https://i.ibb.co/pJyTWbd/modern-home-decor-with-green-sofa-rattan-furniture-green-wall-background-269031-15.jpg" alt="" />
 
-                    {/* <img src={bannergif} alt="" /> */}
-                    <Player
-                        src='https://assets10.lottiefiles.com/private_files/lf30_phcng6qv.json'
-                        className="player"
-                        loop
-                        autoplay
-                    // style={{ height: '23em', width: '23em' }}
-                    />
                 </div>
             </div>
         </div>

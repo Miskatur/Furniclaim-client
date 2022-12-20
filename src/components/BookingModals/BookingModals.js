@@ -41,7 +41,7 @@ const BookingModals = ({ furniture, setFurniture }) => {
             .then(data => {
                 if (data.acknowledged) {
                     setFurniture(null)
-                    toast.success('Appointment booked Successfully.')
+                    toast.success('Added To The Cart Successfully.')
 
                 }
                 else {

@@ -19,11 +19,12 @@ const DashboardLayout = () => {
                         {/* <!-- Sidebar content here --> */}
                         {
                             role === 'Buyer' &&
-                            <li className=' hover:text-primary'><Link to={'/dashboard/myorders'}>My Orders</Link></li>
+                            <li className=' hover:text-primary'><Link to={'/dashboard'}>My Orders</Link></li>
                         }
                         {
                             role === "Admin" &&
                             <>
+                                <li className=' hover:text-primary'><Link to={'/dashboard'}>My Orders</Link></li>
                                 <li className=' hover:text-primary'><Link to={'/dashboard/allsellers'}>All Sellers</Link></li>
                                 <li className=' hover:text-primary'><Link to={'/dashboard/allbuyers'}>All Buyers</Link></li>
                                 <li className=' hover:text-primary'><Link to={'/dashboard/allorders'}>All Orders</Link></li>
@@ -33,6 +34,7 @@ const DashboardLayout = () => {
                         {
                             role === "Seller" &&
                             <>
+                                <li className=' hover:text-primary'><Link to={'/dashboard'}>My Orders</Link></li>
                                 <li className=' hover:text-primary'><Link to={'/dashboard/myproducts'}>My Products</Link></li>
                                 <li className=' hover:text-primary'><Link to={'/dashboard/myclients'}>My Clients</Link></li>
                                 <li className=' hover:text-primary'><Link to={'/dashboard/addproduct'}>Add a Product</Link></li>

@@ -76,8 +76,14 @@ const Register = () => {
                     })
             })
             .catch(err => {
-                const message = err.message;
-                setErrorMessage(message)
+                console.log(err.code);
+                if (err.code === 'auth/weak-password') {
+                    setErrorMessage('Password should be at least 6 characters.')
+                }
+                if (err.code === 'auth/email-already-in-use') {
+                    setErrorMessage('This email already in use. Try a different email.')
+                }
+
             })
 
     }

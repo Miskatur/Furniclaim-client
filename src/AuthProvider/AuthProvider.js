@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth'
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth'
 import app from '../firebase/Firebase.config';
+import { toast } from 'react-hot-toast';
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
@@ -19,6 +20,14 @@ const AuthProvider = ({ children }) => {
             displayName: name,
             photoURL: image
         })
+    }
+
+    const resetPassword = (email) => {
+        sendPasswordResetEmail(auth, email)
+            .then(() => {
+                toast.success('Reset Password Successfully send to your email. Check your Spam Folder too.')
+            })
+            .catch(err => console.error(err))
     }
 
     const Login = (email, password) => {
@@ -49,6 +58,7 @@ const AuthProvider = ({ children }) => {
         setLoading,
         createUser,
         updateUserInfo,
+        resetPassword,
         user,
         setUser,
         Login,
