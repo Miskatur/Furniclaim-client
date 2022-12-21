@@ -1,5 +1,6 @@
 import { Player } from '@lottiefiles/react-lottie-player';
 import React, { useContext, useState } from 'react';
+import { toast } from 'react-hot-toast';
 // import { toast } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
@@ -7,6 +8,7 @@ import { setAuthtoken } from '../../AuthToken/AuthToken';
 
 const Login = () => {
     const [errorMessage, setErrorMessage] = useState('')
+    const [email, setEmail] = useState('')
     const { Login, resetPassword } = useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
@@ -42,12 +44,15 @@ const Login = () => {
                     setErrorMessage("This Email Address Doesn't Exist! Try an Valid Email. ")
                 }
             })
-        handleResetPass(email)
 
     }
 
-    const handleResetPass = (email) => {
+    const handleResetPass = (event) => {
         resetPassword(email)
+            .then(() => {
+                toast.success('Your new password was sent to your email. Check your Spam folder too.')
+            })
+            .catch(e => console.error(e))
     }
     return (
         <div>
@@ -64,14 +69,12 @@ const Login = () => {
                 <div className='border bg-base-100 p-10 w-full lg:w-2/3 mr-auto rounded-xl shadow-xl'>
                     <h2 className='text-2xl text-secondary font-bold mb-5'>Login In</h2>
                     <form onSubmit={handleLogin}>
-                        <input name='email' type="email" placeholder="Email Address" className="input input-bordered input-primary w-full mb-3 text-black" required />
+                        <input name='email' type="email" placeholder="Email Address" className="input input-bordered input-primary w-full mb-3 text-black" required onChange={(e) => setEmail(e.target.value)} />
                         <input name='password' type="password" placeholder="Password" className="input input-bordered input-primary w-full text-black" required />
-                        <p className='underline text-blue-700 text-right mb-3 cursor-pointer' onClick={handleResetPass}>Forgot Password?</p>
+                        <p className='underline text-blue-700 text-right mb-3 cursor-pointer' onClick={() => handleResetPass(email)}>Forgot Password?</p>
                         <p className='text-red-500 text-sm mb-3 text-left'>{errorMessage}</p>
-
                         <button className='btn btn-secondary w-full'>Login</button>
                         <p className='text-black mt-2'>Don't Have an Account? <Link to={'/register'} className="font-bold">Register Now</Link></p>
-
                     </form>
                 </div>
             </div>

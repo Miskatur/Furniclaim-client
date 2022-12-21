@@ -34,7 +34,6 @@ const AddProduct = () => {
         const originalPrice = form.originalPrice.value;
         const resalePrice = form.resalePrice.value;
         const image = form.image.files[0];
-        // console.log(name, location, usedYear, category, condition, originalPrice, resalePrice, image, email, name, verified, date)
         const formData = new FormData()
         formData.append('image', image)
         const url = `https://api.imgbb.com/1/upload?key=${ImgKey}`
@@ -61,7 +60,7 @@ const AddProduct = () => {
                         availabilty: true,
                         sellerId: _id
                     }
-                    console.log(productsInfo)
+
                     fetch(`https://furniclaim-server.vercel.app/products`, {
                         method: 'POST',
                         headers: {

@@ -28,7 +28,6 @@ const MyClient = () => {
         setDeletingClient(null)
     }
     const handleDeletingClient = (product) => {
-        console.log([product]);
         fetch(`https://furniclaim-server.vercel.app/product/${product?._id}`, {
             method: 'DELETE',
             headers: {
@@ -44,7 +43,6 @@ const MyClient = () => {
             })
 
     }
-    console.log(clients);
 
 
     if (loading || isLoading) {

@@ -28,7 +28,6 @@ const BookingModals = ({ furniture, setFurniture }) => {
             availabilty,
             productId: _id
         }
-        console.log(orderData)
         fetch(`https://furniclaim-server.vercel.app/orders`, {
             method: 'POST',
             headers: {

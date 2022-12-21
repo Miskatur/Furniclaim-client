@@ -39,7 +39,7 @@ const AllBuyers = () => {
     if (isLoading) {
         <Loader></Loader>
     }
-    console.log(buyers)
+
     return (
         <div>
             <div className='text-left my-12'>

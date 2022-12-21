@@ -27,7 +27,6 @@ const MyProducts = () => {
     }
 
     const handleDeletingProduct = (product) => {
-        console.log([product]);
         fetch(`https://furniclaim-server.vercel.app/product/${product?._id}`, {
             method: 'DELETE',
             headers: {

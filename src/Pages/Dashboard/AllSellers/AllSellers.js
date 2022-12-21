@@ -17,7 +17,6 @@ const AllSellers = () => {
     })
 
     const handleVerify = (seller) => {
-        console.log(seller)
         fetch(`https://furniclaim-server.vercel.app/users/admin/seller/verify/${seller._id}`, {
             method: 'PUT',
             headers: {
@@ -36,7 +35,7 @@ const AllSellers = () => {
                         }
                     })
                         .then(res => res.json())
-                        .then((data) => { console.log(data); })
+                        .then(() => { })
                     refetch()
                 }
                 else {
@@ -65,7 +64,6 @@ const AllSellers = () => {
     }
 
 
-    console.log(buyers)
     return (
         <div>
             <div className='text-left my-12'>

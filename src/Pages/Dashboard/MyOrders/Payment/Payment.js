@@ -10,7 +10,6 @@ import CheckoutForm from '../CheckoutForm/CheckoutForm';
 const Payment = () => {
     const navigation = useNavigation()
     const info = useLoaderData()
-    console.log(info);
     const { productName, price } = info;
     if (navigation.state === 'loading') {
         return <Loader></Loader>

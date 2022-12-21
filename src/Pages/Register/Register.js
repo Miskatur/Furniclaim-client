@@ -19,7 +19,6 @@ const Register = () => {
         const image = form.image.files[0];
         const password = form.password.value;
         const role = form.select.value;
-        console.log(name, email, image, password, role)
         createUser(email, password)
             .then(res => {
                 const user = res.user;
@@ -76,7 +75,6 @@ const Register = () => {
                     })
             })
             .catch(err => {
-                console.log(err.code);
                 if (err.code === 'auth/weak-password') {
                     setErrorMessage('Password should be at least 6 characters.')
                 }

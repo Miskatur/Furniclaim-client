@@ -24,7 +24,6 @@ const Navbar = () => {
         googleSignIn(googleProvider)
             .then(res => {
                 const user = res.user;
-                console.log(user);
                 const googleUser = {
                     name: user.displayName,
                     email: user.email,
@@ -32,8 +31,6 @@ const Navbar = () => {
                     role: 'Buyer',
                     verified: false
                 }
-
-                console.log(googleUser);
 
                 fetch(`https://furniclaim-server.vercel.app/users`, {
                     method: 'POST',
