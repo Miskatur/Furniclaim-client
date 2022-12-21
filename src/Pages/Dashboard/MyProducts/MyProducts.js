@@ -57,7 +57,7 @@ const MyProducts = () => {
                     refetch()
                 }
                 else {
-                    toast.error(data.message)
+                    toast.error("This Product is already advertised.")
                 }
             })
     }
@@ -104,10 +104,11 @@ const MyProducts = () => {
                                     </td>
                                     <td>
                                         {
-                                            product.availabilty &&
-                                            <button className={`btn btn-sm  btn-info `}
-                                                onClick={() => handleAdvertisement(product._id)}
-                                            >Advertise now</button>
+                                            product.availabilty ?
+                                                <button className={`btn btn-sm  btn-info `}
+                                                    onClick={() => handleAdvertisement(product._id)}
+                                                >Advertise now</button> :
+                                                <p>Advertised</p>
                                         }
                                     </td>
                                     <td>
