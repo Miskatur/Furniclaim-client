@@ -66,7 +66,7 @@ export const routes = createBrowserRouter([
             // },
             {
                 path: '/dashboard',
-                element: <PrivateRoutes><MyOrders></MyOrders></PrivateRoutes>
+                element: <MyOrders></MyOrders>
             },
             {
                 path: '/dashboard/addproduct',
